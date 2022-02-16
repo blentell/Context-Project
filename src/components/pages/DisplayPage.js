@@ -43,7 +43,7 @@ export default function ProductDisplay(props) {
 			</CardContent>
 			<CardActions disableSpacing>
 				<Button
-					sx={{ color: "white" }}
+					sx={{ color: "white", backgroundColor: "darkGray" }}
 					variant="text"
 					onClick={() => {
 						handleAddToCart();
