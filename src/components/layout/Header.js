@@ -19,10 +19,8 @@ function Header() {
 								Game Store
 							</Typography>
 						</Link>
-					</Box>
-					<Link to="/sign-in">
-						<Button color="inherit">Sign in</Button>
-					</Link>
+					</Box>					
+						<Button color="inherit">Sign in</Button>					
 					<Link to="/cart">
 						<IconButton
 							size="large"
