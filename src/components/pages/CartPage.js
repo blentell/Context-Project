@@ -10,7 +10,8 @@ import { useShoppingCart } from "../../context/shoppingCartContext";
 import Layout from "../layout/Layout";
 
 function CartPage() {
-	const { shoppingCart, emptyCart, total } = useShoppingCart();
+  const { shoppingCart, emptyCart, total } = useShoppingCart();
+  
 	return (
 		<Layout>
 			<h1 style={{ color: "white", textDecoration: "underline" }}>Shopping Cart</h1>

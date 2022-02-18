@@ -1,29 +1,30 @@
 import { createContext, useReducer, useContext } from "react";
 
 export const shoppingCartContext = createContext();
+
 export const useShoppingCart = () => useContext(shoppingCartContext);
+
 const shoppingCartInitialState = [];
 
 const addItemToCartAction = "addItemToCart";
 const removeItemFromCartAction = "removeItemFromCart";
 const emptyCartAction = "emptyCart";
+
 const shoppingCartReducer = (state, action) => {
 	if (action.type === addItemToCartAction) {
-		//write some logic to add item to cart
 
-		//Check if item exists already in cart
 		const itemFoundInCart = state.find(
 			(cartItem) => cartItem.id === action.cartItem.id
 		);
-		//if item does not exist, add it at end with qty of 1
+
 		if (!itemFoundInCart) {
 			return [...state, { ...action.cartItem, quantity: 1 }];
 		}
-		//if it is already in the cart, we will still remove it
+
 		const cartWithFoundItemRemoved = state.filter(
 			(item) => item.id !== action.cartItem.id
 		);
-		//but add it again with the correct qty
+
 		return [
 			...cartWithFoundItemRemoved,
 			{ ...action.cartItem, quantity: itemFoundInCart.quantity + 1 },
