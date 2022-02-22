@@ -4,13 +4,25 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import CartItem from "./CartItem";
-import { useShoppingCart } from "../../context/shoppingCartContext";
+import { emptyCartAction } from "../../reduxStore";
 import Layout from "../layout/Layout";
+import CartItem from "./CartItem";
 
 function CartPage() {
-  const { shoppingCart, emptyCart, total } = useShoppingCart();
+ 
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+
+	const total = shoppingCart.reduce((acc, cartItem) => {
+		return acc + cartItem.price * cartItem.quantity;
+	}, 0);
+
+	const dispatch = useDispatch();
+
+	const emptyCart = () => {
+		dispatch({ type: emptyCartAction });
+  };
   
 	return (
 		<Layout>

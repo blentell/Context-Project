@@ -8,15 +8,31 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { useShoppingCart } from "../../context/shoppingCartContext";
+// import { useShoppingCart } from "../../context/shoppingCartContext";
+import { useDispatch } from "react-redux";
+import { addItemToCartAction } from "../../reduxStore";
 
 export default function ProductDisplay(props) {
-	const { addItemsToCart } = useShoppingCart();
+	// const { addItemsToCart } = useShoppingCart();
+
+	const dispatch = useDispatch();
+
 	const { product } = props;
 	const { id, title, brand, price, image, description } = product;
 
 	const handleAddToCart = () => {
-		addItemsToCart(product);
+		dispatch({
+			type: addItemToCartAction,
+			cartItem: {
+				id: product.id,
+				title: product.title,
+				brand: product.brand,
+				price: product.price,
+				image: product.image,
+				description: product.description,
+			},
+		});
+		// addItemsToCart(product);
 	};
 	return (
 		<Card sx={{ mx: "auto", backgroundColor: "#0000B8", color: "white" }}>
@@ -45,10 +61,7 @@ export default function ProductDisplay(props) {
 				<Button
 					sx={{ color: "white", backgroundColor: "darkGray" }}
 					variant="text"
-					onClick={() => {
-						handleAddToCart();
-					}}
-				>
+					onClick={handleAddToCart}>
 					Add to cart
 				</Button>
 				<IconButton aria-label="add to favorites" sx={{ marginLeft: "auto" }}>
